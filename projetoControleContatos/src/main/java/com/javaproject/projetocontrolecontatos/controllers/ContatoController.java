@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Contato")
+@RequestMapping("/api/contatos")
 public class ContatoController {
 
     private ContatoService contatoService;
@@ -19,12 +19,5 @@ public class ContatoController {
         this.contatoService = contatoService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Contato>> getAll(){
-        List<Contato> contatos = contatoService.getAll();
-        if(contatos == null)
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(contatos);
-    }
 
 }

@@ -21,6 +21,13 @@ public class Pessoa {
     @Column
     private String cep;
 
+    @Column
+    private String cidade;
+
+    @Column
+    private String uf;
+
+
     public UUID getId() {
         return id;
     }
@@ -68,10 +75,4 @@ public class Pessoa {
     public void setUf(String uf) {
         this.uf = uf;
     }
-
-    @Column
-    private String cidade;
-
-    @Column
-    private String uf;
 }

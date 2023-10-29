@@ -5,5 +5,5 @@ import com.javaproject.projetocontrolecontatos.models.Contato;
 import java.util.List;
 
 public interface ContatoServiceInterface {
-    List<Contato> getAll();
+
 }

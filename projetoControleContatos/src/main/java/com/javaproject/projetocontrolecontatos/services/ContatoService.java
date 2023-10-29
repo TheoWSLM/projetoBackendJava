@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ContatoService implements ContatoServiceInterface {
+public class ContatoService {
 
     private ContatoRepository contatoRepository;
-    @Override
-    public List<Contato> getAll() {
-        return contatoRepository.findAll();
-    }
+
 }
