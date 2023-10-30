@@ -13,7 +13,5 @@ import java.util.UUID;
 public interface ContatoRepository extends JpaRepository<Contato, UUID> {
     @Query("SELECT contato FROM Contato contato WHERE contato.pessoa.id = :pessoaId")
     List<Contato> encontrarContatosComPessoaId(@Param("pessoaId") UUID pessoaId);
-
-    void delete(UUID id);
 }
 

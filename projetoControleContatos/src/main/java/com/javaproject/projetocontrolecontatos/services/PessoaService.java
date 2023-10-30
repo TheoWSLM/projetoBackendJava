@@ -28,4 +28,24 @@ public class PessoaService implements PessoaServiceInterface {
         pessoaRepository.deleteById(id);
     }
 
+    @Override
+    public Pessoa save(Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
+    }
+
+    @Override
+    public Pessoa update(Pessoa pessoa) {
+        Optional<Pessoa> pessoaAtualizar = pessoaRepository.findById(pessoa.getId());
+
+        if(pessoaAtualizar.isPresent()) {
+            Pessoa novaPessoa = pessoaAtualizar.get();
+            novaPessoa.setNome(pessoa.getNome());
+            novaPessoa.setCidade(pessoa.getCidade());
+            novaPessoa.setEndereco(pessoa.getEndereco());
+            novaPessoa.setUf(pessoa.getUf());
+            novaPessoa.setCep(pessoa.getCep());
+            return pessoaRepository.save(novaPessoa);
+        }
+        return pessoa;
+    }
 }

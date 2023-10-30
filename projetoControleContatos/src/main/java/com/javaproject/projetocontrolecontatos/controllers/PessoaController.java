@@ -65,6 +65,39 @@ public class PessoaController {
         return ResponseEntity.ok(contatos);
         }
 
+    @PostMapping()
+    public ResponseEntity<Pessoa> novaPessoa(@RequestBody Pessoa pessoa) {
+        Pessoa novaPessoa = pessoaService.save(pessoa);
+
+        if (novaPessoa == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(novaPessoa);
+    }
+
+    @PostMapping("{id}/contatos ")
+    public ResponseEntity<Contato> novoContato(@RequestBody Contato contato){
+        Contato novoContato = contatoService.save(contato);
+
+        if(contato == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(contato);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Pessoa> atualizarPessoa(@RequestBody Pessoa pessoa){
+        Pessoa pessoaAtualizada = pessoaService.update(pessoa);
+
+        if(pessoaAtualizada == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(pessoaAtualizada);
+
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable UUID id){
         pessoaService.delete(id);

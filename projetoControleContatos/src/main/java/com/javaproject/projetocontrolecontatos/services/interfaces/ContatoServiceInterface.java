@@ -11,4 +11,11 @@ public interface ContatoServiceInterface {
 
     Optional<List<Contato>> encontrarContatos(UUID id);
 
+    void delete(UUID id);
+
+    Optional<Contato> getById(UUID id);
+
+    Contato save(Contato contato);
+
+    Contato update(Contato contato);
 }

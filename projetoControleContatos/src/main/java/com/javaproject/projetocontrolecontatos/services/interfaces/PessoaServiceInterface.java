@@ -12,4 +12,8 @@ public interface PessoaServiceInterface {
     List<Pessoa> getAll();
     Optional<Pessoa> getById(UUID id);
     void delete(UUID id);
+
+    Pessoa save(Pessoa pessoa);
+
+    Pessoa update(Pessoa pessoa);
 }

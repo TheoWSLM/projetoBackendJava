@@ -17,9 +17,6 @@ public class Contato {
 
     @Column(nullable = false)
     private String contato;
-
-    @Column(nullable = false)
-    private UUID pessoaId;
     @ManyToOne
     @JoinColumn(name = "pessoa")
     private Pessoa pessoa;
@@ -47,14 +44,6 @@ public class Contato {
 
     public void setContato(String contato) {
         this.contato = contato;
-    }
-
-    public UUID getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(UUID pessoaId) {
-        this.pessoaId = pessoaId;
     }
 
     public Pessoa getPessoa() {
