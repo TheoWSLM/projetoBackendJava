@@ -18,7 +18,14 @@ public class PessoaService implements PessoaServiceInterface {
         return pessoaRepository.findAll();
     }
 
+    @Override
     public Optional<Pessoa> getById(UUID id) {
         return pessoaRepository.findById(id);
     }
+
+    @Override
+    public void delete(UUID id) {
+        pessoaRepository.deleteById(id);
+    }
+
 }

@@ -17,6 +17,7 @@ public class Contato {
 
     @Column(nullable = false)
     private String contato;
+
     @Column(nullable = false)
     private UUID pessoaId;
     @ManyToOne

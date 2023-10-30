@@ -4,13 +4,13 @@ package com.javaproject.projetocontrolecontatos.controllers;
 import java.util.Optional;
 
 import com.javaproject.projetocontrolecontatos.dto.PessoaMalaDiretaDTO;
+import com.javaproject.projetocontrolecontatos.models.Contato;
 import com.javaproject.projetocontrolecontatos.models.Pessoa;
+import com.javaproject.projetocontrolecontatos.services.ContatoService;
 import com.javaproject.projetocontrolecontatos.services.PessoaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +20,7 @@ import java.util.UUID;
 public class PessoaController {
 
     private PessoaService pessoaService;
+    private ContatoService contatoService;
 
     public PessoaController(PessoaService pessoaService) {
         this.pessoaService = pessoaService;
@@ -54,5 +55,21 @@ public class PessoaController {
 
         return ResponseEntity.ok(pessoaDTO);
     }
+    
+    @GetMapping("{id}/contatos")
+        public ResponseEntity<Optional<List<Contato>>> getContatosPessoa(@PathVariable UUID id){
+            Optional<List<Contato>> contatos = contatoService.encontrarContatos(id);
+        if (contatos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(contatos);
+        }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id){
+        pessoaService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
 
