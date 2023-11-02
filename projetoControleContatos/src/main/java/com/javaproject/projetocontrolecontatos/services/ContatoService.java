@@ -2,6 +2,7 @@ package com.javaproject.projetocontrolecontatos.services;
 
 import com.javaproject.projetocontrolecontatos.models.Contato;
 import com.javaproject.projetocontrolecontatos.repositories.ContatoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.javaproject.projetocontrolecontatos.services.interfaces.ContatoServiceInterface;
 
@@ -13,6 +14,12 @@ import java.util.UUID;
 public class ContatoService implements ContatoServiceInterface {
 
     private ContatoRepository contatoRepository;
+
+    @Autowired
+    public ContatoService(ContatoRepository contatoRepository) {
+        this.contatoRepository = contatoRepository;
+    }
+
 @Override
    public Optional<List<Contato>> encontrarContatos(UUID id){
     return Optional.ofNullable(contatoRepository.encontrarContatosComPessoaId(id));
@@ -32,15 +39,15 @@ public class ContatoService implements ContatoServiceInterface {
     }
 
     @Override
-    public Contato update(Contato contato) {
-        Optional<Contato> contatoAtualizar = contatoRepository.findById(contato.getId());
+    public Contato update(UUID id, Contato contato) {
+        Optional<Contato> contatoAtualizar = contatoRepository.findById(id);
 
         if(contatoAtualizar.isPresent()) {
-            Contato novoContato = contatoAtualizar.get();
-            novoContato.setContato(contato.getContato());
-            novoContato.setTipoContato(contato.getTipoContato());
-            novoContato.setPessoa(contato.getPessoa());
-            return contatoRepository.save(novoContato);
+            Contato contatoAtualizado = contatoAtualizar.get();
+            contatoAtualizado.setContato(contato.getContato());
+            contatoAtualizado.setTipoContato(contato.getTipoContato());
+            contatoAtualizado.setPessoa(contato.getPessoa());
+            return contatoRepository.save(contatoAtualizado);
         }
         return contato;
     }

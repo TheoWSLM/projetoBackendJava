@@ -2,6 +2,7 @@ package com.javaproject.projetocontrolecontatos.services;
 
 import com.javaproject.projetocontrolecontatos.models.Pessoa;
 import com.javaproject.projetocontrolecontatos.repositories.PessoaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.javaproject.projetocontrolecontatos.services.interfaces.PessoaServiceInterface;
 
@@ -12,6 +13,11 @@ import java.util.UUID;
 @Service
 public class PessoaService implements PessoaServiceInterface {
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    public PessoaService(PessoaRepository pessoaRepository) {
+        this.pessoaRepository = pessoaRepository;
+    }
 
     @Override
     public List<Pessoa> getAll() {
@@ -34,17 +40,17 @@ public class PessoaService implements PessoaServiceInterface {
     }
 
     @Override
-    public Pessoa update(Pessoa pessoa) {
-        Optional<Pessoa> pessoaAtualizar = pessoaRepository.findById(pessoa.getId());
+    public Pessoa update(UUID id, Pessoa pessoa) {
+        Optional<Pessoa> pessoaAtualizar = pessoaRepository.findById(id);
 
         if(pessoaAtualizar.isPresent()) {
-            Pessoa novaPessoa = pessoaAtualizar.get();
-            novaPessoa.setNome(pessoa.getNome());
-            novaPessoa.setCidade(pessoa.getCidade());
-            novaPessoa.setEndereco(pessoa.getEndereco());
-            novaPessoa.setUf(pessoa.getUf());
-            novaPessoa.setCep(pessoa.getCep());
-            return pessoaRepository.save(novaPessoa);
+            Pessoa pessoaAtualizada = pessoaAtualizar.get();
+            pessoaAtualizada.setNome(pessoa.getNome());
+            pessoaAtualizada.setCidade(pessoa.getCidade());
+            pessoaAtualizada.setEndereco(pessoa.getEndereco());
+            pessoaAtualizada.setUf(pessoa.getUf());
+            pessoaAtualizada.setCep(pessoa.getCep());
+            return pessoaRepository.save(pessoaAtualizada);
         }
         return pessoa;
     }

@@ -2,6 +2,8 @@ package com.javaproject.projetocontrolecontatos.models;
 
 import com.javaproject.projetocontrolecontatos.enums.TipoContato;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.UUID;
 
@@ -19,6 +21,7 @@ public class Contato {
     private String contato;
     @ManyToOne
     @JoinColumn(name = "pessoa")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Pessoa pessoa;
 
 

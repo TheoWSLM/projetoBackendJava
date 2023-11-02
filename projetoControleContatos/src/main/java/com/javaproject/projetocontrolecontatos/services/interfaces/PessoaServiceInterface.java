@@ -15,5 +15,5 @@ public interface PessoaServiceInterface {
 
     Pessoa save(Pessoa pessoa);
 
-    Pessoa update(Pessoa pessoa);
+    Pessoa update(UUID id, Pessoa pessoa);
 }

@@ -17,5 +17,5 @@ public interface ContatoServiceInterface {
 
     Contato save(Contato contato);
 
-    Contato update(Contato contato);
+    Contato update(UUID id, Contato contato);
 }
